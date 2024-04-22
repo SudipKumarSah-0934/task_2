@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -35,19 +34,6 @@ class _MyAppState extends State<MyApp> {
       home: const HomePage(),
       initialBinding: HomeBinding(),
       builder: EasyLoading.init(),
-      onInit: () {
-        // Listen for changes in the theme mode and update the system overlay style
-        ever<ThemeMode>(
-          themeController.currentTheme,
-          (themeMode) {
-            SystemUiOverlayStyle newSystemUiOverlayStyle =
-                themeMode == ThemeMode.light
-                    ? SystemUiOverlayStyle.dark // Light mode: Dark icons
-                    : SystemUiOverlayStyle.light; // Dark mode: Light icons
-            SystemChrome.setSystemUIOverlayStyle(newSystemUiOverlayStyle);
-          },
-        );
-      },
     );
   }
 }

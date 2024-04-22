@@ -94,7 +94,7 @@ class DetailPage extends StatelessWidget {
                           child: StepProgressIndicator(
                             totalSteps: totalTodos == 0 ? 1 : totalTodos,
                             currentStep: homeCtrl.doneTodos.length,
-                            size: 5,
+                            size: 10,
                             padding: 0,
                             selectedGradientColor: LinearGradient(
                               colors: [color.withOpacity(0.5), color],
@@ -106,6 +106,7 @@ class DetailPage extends StatelessWidget {
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
                             ),
+                            roundedEdges: Radius.circular(8.0),
                           ),
                         ),
                       ],
@@ -180,13 +181,28 @@ class DetailPage extends StatelessWidget {
                   thickness: 2,
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(child: TodoList()),
-                  Expanded(child: CompletedList()),
-                ],
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 5.0.wp),
+                child: SizedBox(
+                  height: 50.0.hp, // Fixed height for scrollable container
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          width: 20.0.hp, // Fixed width for TodoList
+                          child: TodoList(),
+                        ),
+                        SizedBox(
+                          width: 20.0.hp, // Fixed width for CompletedList
+                          child: CompletedList(),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 5.0.wp),

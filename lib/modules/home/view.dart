@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:task_2/core/app_theme/theme_controller.dart';
@@ -17,17 +16,6 @@ class HomePage extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ThemeController>(builder: (themeController) {
-      final currentThemeMode = themeController.currentTheme.value;
-
-      // Define the SystemUiOverlayStyle based on the theme mode
-      SystemUiOverlayStyle systemUiOverlayStyle =
-          currentThemeMode == ThemeMode.dark
-              ? SystemUiOverlayStyle.light // Light mode: Dark icons
-              : SystemUiOverlayStyle.dark; // Dark mode: Light icons
-
-      // Apply the systemUiOverlayStyle
-      SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
-      
       return Scaffold(
         body: Obx(
           () => IndexedStack(
