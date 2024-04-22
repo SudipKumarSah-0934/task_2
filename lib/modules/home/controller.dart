@@ -20,6 +20,7 @@ class HomeController extends GetxController {
   final task = Rx<Task?>(null);
   final doingTodos = <dynamic>[].obs;
   final doneTodos = <dynamic>[].obs;
+  var noTask = true.obs;
 
   @override
   void onInit() {

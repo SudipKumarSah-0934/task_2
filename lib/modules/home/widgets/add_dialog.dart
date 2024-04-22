@@ -77,11 +77,7 @@ class AddDialog extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 5.0.wp),
                 child: TextFormField(
                   controller: homeCtrl.formEditCtrl,
-                  decoration: InputDecoration(
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey[400]!),
-                    ),
-                  ),
+                  decoration: const InputDecoration(hintText: 'Enter your task name'),
                   autofocus: true,
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {

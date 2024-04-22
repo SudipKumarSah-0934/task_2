@@ -35,8 +35,7 @@ class AddCard extends StatelessWidget {
                       child: TextFormField(
                         controller: homeCtrl.formEditCtrl,
                         decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Title',
+                          hintText: 'Enter your task title ',
                         ),
                         validator: (value) {
                           if (value == null || value.trim().isEmpty) {
@@ -99,7 +98,10 @@ class AddCard extends StatelessWidget {
                           homeCtrl.changeChipIndex(0);
                         }
                       },
-                      child: const Text("Confirm"),
+                      child: const Text(
+                        "Confirm",
+                        style: TextStyle(color: Colors.white),
+                      ),
                     )
                   ],
                 ),

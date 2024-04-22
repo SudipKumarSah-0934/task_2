@@ -28,11 +28,11 @@ class TaskCard extends StatelessWidget {
         margin: EdgeInsets.all(3.0.wp),
         decoration: BoxDecoration(
           color: Colors.white,
+          borderRadius: BorderRadius.circular(8.0),
           boxShadow: [
             BoxShadow(
               color: Colors.grey[400]!,
-              blurRadius: 8,
-              offset: const Offset(0, 7),
+              blurRadius: 4,
             ),
           ],
         ),
@@ -56,24 +56,27 @@ class TaskCard extends StatelessWidget {
                 colors: [Colors.white, Colors.white],
               ),
             ),
-            Padding(
-              padding: EdgeInsets.all(6.0.wp),
-              child: Icon(
-                IconData(task.icon, fontFamily: 'MaterialIcons'),
-                color: color,
+            Center(
+              child: Padding(
+                padding: EdgeInsets.all(4.0.wp),
+                child: Icon(
+                  IconData(task.icon, fontFamily: 'MaterialIcons'),
+                  color: color,
+                  size: cardWidth / 5,
+                ),
               ),
             ),
             Padding(
-              padding: EdgeInsets.all(6.0.wp),
+              padding: EdgeInsets.symmetric(horizontal: 6.0.wp),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     task.title,
                     style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 12.0.sp,
-                    ),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12.0.sp,
+                        color: Colors.grey),
                     overflow: TextOverflow.ellipsis,
                   ),
                   SizedBox(

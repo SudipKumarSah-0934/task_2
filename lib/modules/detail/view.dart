@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
-import 'package:task_2/modules/detail/widgets/done_list.dart';
+import 'package:task_2/modules/detail/widgets/completed_list.dart';
 
 import '../../core/utils/extensions.dart';
 import '../home/controller.dart';
-import 'widgets/doing_list.dart';
+import 'widgets/todo_list.dart';
 
 class DetailPage extends StatelessWidget {
   final homeCtrl = Get.find<HomeController>();
@@ -16,6 +16,7 @@ class DetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     var task = homeCtrl.task.value!;
     var color = HexColor.fromHex(task.color);
+
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
@@ -49,6 +50,7 @@ class DetailPage extends StatelessWidget {
                         fontFamily: 'MaterialIcons',
                       ),
                       color: color,
+                      size: 50,
                     ),
                     SizedBox(
                       width: 3.0.wp,
@@ -56,7 +58,7 @@ class DetailPage extends StatelessWidget {
                     Text(
                       task.title,
                       style: TextStyle(
-                          fontSize: 12.0.sp, fontWeight: FontWeight.bold),
+                          fontSize: 18.0.sp, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
@@ -65,13 +67,18 @@ class DetailPage extends StatelessWidget {
                 () {
                   var totalTodos =
                       homeCtrl.doingTodos.length + homeCtrl.doneTodos.length;
+                  (homeCtrl.doingTodos.isEmpty && homeCtrl.doneTodos.isEmpty)
+                      ? homeCtrl.noTask.value = true
+                      : homeCtrl.noTask.value = false;
+
                   return Padding(
                     padding: EdgeInsets.only(
                       top: 3.0.wp,
-                      left: 16.0.wp,
+                      left: 10.0.wp,
                       right: 8.0.wp,
                     ),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
                           '$totalTodos Tasks',
@@ -107,19 +114,15 @@ class DetailPage extends StatelessWidget {
                 },
               ),
               Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 5.0.wp,
-                  vertical: 2.0.wp,
+                padding: EdgeInsets.all(
+                  5.0.wp,
                 ),
                 child: TextFormField(
                   controller: homeCtrl.formEditCtrl,
-                  autofocus: true,
                   decoration: InputDecoration(
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey[400]!),
-                    ),
+                    hintText: 'enter your task name',
                     prefixIcon: Icon(
-                      Icons.check_box_outline_blank,
+                      Icons.task_alt_rounded,
                       color: Colors.grey[400],
                     ),
                     suffixIcon: IconButton(
@@ -129,8 +132,11 @@ class DetailPage extends StatelessWidget {
                               homeCtrl.addTodo(homeCtrl.formEditCtrl.text);
                           if (success) {
                             EasyLoading.showSuccess('Todo item added');
+                            homeCtrl.noTask.value =
+                                false; // Set noTask to false
                           } else {
                             EasyLoading.showError('Todo item already exits');
+                            homeCtrl.noTask.value = true;
                           }
                           homeCtrl.updateTodo();
                           homeCtrl.formEditCtrl.clear();
@@ -147,8 +153,47 @@ class DetailPage extends StatelessWidget {
                   },
                 ),
               ),
-              DoingList(),
-              DoneList(),
+              Obx(() {
+                return homeCtrl.noTask.value
+                    ? Center(
+                        child: Padding(
+                          padding: EdgeInsets.all(8.0.sp),
+                          child: const Text(
+                            'No tasks',
+                            style: TextStyle(fontSize: 24.0),
+                          ),
+                        ),
+                      )
+                    : Center(
+                        child: Padding(
+                          padding: EdgeInsets.all(8.0.sp),
+                          child: const Text(
+                            'All Tasks',
+                            style: TextStyle(fontSize: 24.0),
+                          ),
+                        ),
+                      );
+              }),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 5.0.wp),
+                child: const Divider(
+                  thickness: 2,
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(child: TodoList()),
+                  Expanded(child: CompletedList()),
+                ],
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 5.0.wp),
+                child: const Divider(
+                  thickness: 2,
+                ),
+              )
             ],
           ),
         ),
