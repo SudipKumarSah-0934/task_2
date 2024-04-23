@@ -106,7 +106,7 @@ class DetailPage extends StatelessWidget {
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
                             ),
-                            roundedEdges: Radius.circular(8.0),
+                            roundedEdges: const Radius.circular(8.0),
                           ),
                         ),
                       ],

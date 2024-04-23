@@ -26,4 +26,4 @@ This project is a starting point for a Flutter application.
 ## Steps to install
  - clone from https://github.com/SudipKumarSah-0934/task_2 and run pub get
  - Once you run app successfully, navigate through several features namely adding, deleting tasks and find useful to yourself
- 
+ - find apk file
