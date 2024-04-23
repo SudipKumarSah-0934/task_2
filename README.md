@@ -27,5 +27,5 @@ This project is a starting point for a Flutter application.
  - clone from https://github.com/SudipKumarSah-0934/task_2 and run pub get
  - Once you run app successfully, navigate through several features namely adding, deleting tasks and find useful to yourself
  - build apk file with command 
-flutter build apk --no-tree-shake-icons --release
+  -- flutter build apk --no-tree-shake-icons --release
 
